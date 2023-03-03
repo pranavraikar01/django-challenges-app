@@ -18,6 +18,6 @@ urlpatterns=[
     # path("december",views.index12),
 #NOTE:we can write different urls like the above syntax also but it is too time consuming if we have more and more views on our website therefore we do it in differetnt
 #  format as shown below:
-
+    path("<month>",views.monthly_chalenges)         #<name_of_path_which_is_dynamic>   this is used to create dynamic path segments
 
 ]
