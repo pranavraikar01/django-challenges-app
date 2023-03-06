@@ -27,22 +27,50 @@ from django.shortcuts import render
 #     return HttpResponse("This is the month of november!") 
 # def index12(request):
 #     return HttpResponse("This is the month of  "+ d +" !")  #just declared a variable and used it 
-#NOTE:we can write different views like the above syntax also but it is too time consuming if we have more and more views on our website therefore we do it in differetnt
-#  format as shown below:
-def monthly_chalenges_by_number(request,month):
-    return HttpResponse(month)                 #returns the month value 
 
-def monthly_chalenges(request,month):           #syntax of arguments to the view function imp here
-    if month=='january':
-        chalenge_text="This is the ,month of january!"
-    elif month=='february':
-        chalenge_text="This is the ,month of february!"
-    elif month=='march':
-        chalenge_text="This is the ,month of march!"
-    elif month=='april':
-        chalenge_text="This is the ,month of april!"
-    else:
-        return HttpResponseNotFound("this month is not supported")          #this throws a error using similar concept like exception handling 
+
+# #NOTE:we can write different views like the above syntax also but it is too time consuming if we have more and more views on our website therefore we do it in differetnt
+# #  format as shown below:
+# def monthly_chalenges_by_number(request,month):
+#     return HttpResponse(month)                 #returns the month value 
+
+# def monthly_chalenges(request,month):           #syntax of arguments to the view function imp here
+#     if month=='january':
+#         chalenge_text="This is the ,month of january!"
+#     elif month=='february':
+#         chalenge_text="This is the ,month of february!"
+#     elif month=='march':
+#         chalenge_text="This is the ,month of march!"
+#     elif month=='april':
+#         chalenge_text="This is the ,month of april!"
+#     else:
+#         return HttpResponseNotFound("this month is not supported")          #this throws a error using similar concept like exception handling 
     
-    #and so on we can write for other months too
+#     #and so on we can write for other months too
+#     return HttpResponse(chalenge_text)
+
+
+
+#NOTE: WE CAN WRITE THE ABOVE CODE MORE DYNAMICALLY AS SHOWN BELOW instead of creating a lot of elif statements use dictionary
+
+#first create dictionary in which key are the paths here it is months
+monthly_chalenges={
+    "january":"This is january",
+    "february":"this is february",
+    "march":"this is march",
+    "april":"this is april",
+    "may":"this is may",
+    "june":"this is june",
+    "july":"this is july",
+    "august":"this is august"
+}
+def monthly_chalenge_by_number(request,month):
+    return HttpResponse(month)                 #returns the month content using its key
+
+def monthly_chalenge(request,month):           #syntax of arguments to the view function imp here
+   try:
+    chalenge_text=monthly_chalenges[month]
     return HttpResponse(chalenge_text)
+   except:
+    return HttpResponseNotFound("this month doesnt exist")
+    
