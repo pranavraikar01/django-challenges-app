@@ -29,6 +29,9 @@ from django.shortcuts import render
 #     return HttpResponse("This is the month of  "+ d +" !")  #just declared a variable and used it 
 #NOTE:we can write different views like the above syntax also but it is too time consuming if we have more and more views on our website therefore we do it in differetnt
 #  format as shown below:
+def monthly_chalenges_by_number(request,month):
+    return HttpResponse(month)                 #returns the month value 
+
 def monthly_chalenges(request,month):           #syntax of arguments to the view function imp here
     if month=='january':
         chalenge_text="This is the ,month of january!"
