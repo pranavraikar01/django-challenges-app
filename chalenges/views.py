@@ -1,4 +1,4 @@
-from django.http import HttpResponse,HttpResponseNotFound
+from django.http import HttpResponse,HttpResponseNotFound,HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
@@ -64,12 +64,20 @@ monthly_chalenges={
     "july":"this is july",
     "august":"this is august"
 }
+#if month is entyered as integer then this view is called
 def monthly_chalenge_by_number(request,month):
-    return HttpResponse(month)                 #returns the month content using its key
+    months=list(monthly_chalenges.keys())       #.keys gives the keys  from monthly_chalenges dictionary and they are stored in a list named months
+    if month>len(months):
+      return HttpResponseNotFound("invalid month")
+
+    redirect_month=months[month-1]             #the enterd number is then matched with the key number of dictioanry and its key i.e month_name is saved in redirect_month
+    return HttpResponseRedirect("/chalenges/" + redirect_month)      #redirects to the monthly_chalenge view
+    
+    
 
 def monthly_chalenge(request,month):           #syntax of arguments to the view function imp here
    try:
-    chalenge_text=monthly_chalenges[month]
+    chalenge_text=monthly_chalenges[month]          #data from dictionary is fetched using its respective key
     return HttpResponse(chalenge_text)
    except:
     return HttpResponseNotFound("this month doesnt exist")
