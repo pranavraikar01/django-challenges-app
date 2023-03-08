@@ -1,5 +1,6 @@
 from django.http import HttpResponse,HttpResponseNotFound,HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
 
 # Create your views here.
 # d="december"
@@ -71,8 +72,11 @@ def monthly_chalenge_by_number(request,month):
       return HttpResponseNotFound("invalid month")
 
     redirect_month=months[month-1]             #the enterd number is then matched with the key number of dictioanry and its key i.e month_name is saved in redirect_month
-    return HttpResponseRedirect("/chalenges/" + redirect_month)      #redirects to the monthly_chalenge view
-    
+
+
+    # return HttpResponseRedirect("/chalenges/" + redirect_month)      #redirects to the monthly_chalenge view
+    redirect_path=reverse("month-chalenge",args=[redirect_month]) # the reverse function convets this to /chalenge/january thus our path is more dynamic now
+
     
 
 def monthly_chalenge(request,month):           #syntax of arguments to the view function imp here
