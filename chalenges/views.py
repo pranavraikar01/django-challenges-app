@@ -52,7 +52,46 @@ from django.urls import reverse
 
 
 
-#NOTE: WE CAN WRITE THE ABOVE CODE MORE DYNAMICALLY AS SHOWN BELOW instead of creating a lot of elif statements use dictionary
+# #NOTE: WE CAN WRITE THE ABOVE CODE MORE DYNAMICALLY AS SHOWN BELOW instead of creating a lot of elif statements use dictionary
+
+# #first create dictionary in which key are the paths here it is months
+# monthly_chalenges={
+#     "january":"This is january",
+#     "february":"this is february",
+#     "march":"this is march",
+#     "april":"this is april",
+#     "may":"this is may",
+#     "june":"this is june",
+#     "july":"this is july",
+#     "august":"this is august"
+# }
+# #if month is entyered as integer then this view is called
+# def monthly_chalenge_by_number(request,month):
+#     months=list(monthly_chalenges.keys())       #.keys gives the keys  from monthly_chalenges dictionary and they are stored in a list named months
+#     if month>len(months):
+#       return HttpResponseNotFound("invalid month")
+
+#     redirect_month=months[month-1]             #the enterd number is then matched with the key number of dictioanry and its key i.e month_name is saved in redirect_month
+
+
+#     # return HttpResponseRedirect("/chalenges/" + redirect_month)      #redirects to the monthly_chalenge view
+#     redirect_path=reverse("month-chalenge",args=[redirect_month]) # the reverse function convets this to /chalenge/january thus our path is more dynamic now
+#     return HttpResponseRedirect(redirect_path) 
+    
+
+# def monthly_chalenge(request,month):           #syntax of arguments to the view function imp here
+#    try:
+#     chalenge_text=monthly_chalenges[month]          #data from dictionary is fetched using its respective key
+#     return HttpResponse(chalenge_text)
+#    except:
+#     return HttpResponseNotFound("this month doesnt exist")
+    
+
+
+
+
+
+#NOTE:ABOVE WE HAVE CREATED THE URLS FOR PRINTING DATA IN THE FORM OF STRING ON OUR WEB PAGE,BELOW WILL SHOW HTML PAGES ON OUR WEB PAGE USING DJANGO
 
 #first create dictionary in which key are the paths here it is months
 monthly_chalenges={
@@ -82,7 +121,7 @@ def monthly_chalenge_by_number(request,month):
 def monthly_chalenge(request,month):           #syntax of arguments to the view function imp here
    try:
     chalenge_text=monthly_chalenges[month]          #data from dictionary is fetched using its respective key
+    response_data=f"<h1>{chalenge_text}</h1>"
     return HttpResponse(chalenge_text)
    except:
-    return HttpResponseNotFound("this month doesnt exist")
-    
+    return HttpResponseNotFound("<h1>this month doesnt exist</h1>")
