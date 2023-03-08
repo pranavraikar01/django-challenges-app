@@ -76,7 +76,7 @@ def monthly_chalenge_by_number(request,month):
 
     # return HttpResponseRedirect("/chalenges/" + redirect_month)      #redirects to the monthly_chalenge view
     redirect_path=reverse("month-chalenge",args=[redirect_month]) # the reverse function convets this to /chalenge/january thus our path is more dynamic now
-
+    return HttpResponseRedirect(redirect_path) 
     
 
 def monthly_chalenge(request,month):           #syntax of arguments to the view function imp here
