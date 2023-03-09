@@ -33,6 +33,7 @@ urlpatterns=[
 
 
 #NOTE:ABOVE WE HAVE CREATED THE URLS FOR PRINTING SINGLE STRING ON OUR WEB PAGE,BELOW WILL SHOW HTML PAGES ON OUR WEB PAGE USING DJANGO
+    path("",views.index),       #empty path i.e /chalenges/ is run
     path("<int:month>",views.monthly_chalenge_by_number),        #i.e first url will check number if yes then it will call number vala view
     path("<str:month>",views.monthly_chalenge, name="month-chalenge")         #<name_of_path_which_is_dynamic>   this is used to create dynamic path segments
 ]

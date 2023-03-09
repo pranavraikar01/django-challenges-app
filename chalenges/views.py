@@ -104,6 +104,22 @@ monthly_chalenges={
     "july":"this is july",
     "august":"this is august"
 }
+
+def index(request):
+    list_items=""       #generates an empty string initially
+    months=list(monthly_chalenges.keys()) 
+
+    for month in months:
+       capitalized_month=month.capitalize()
+       month_path=reverse("month-chalenge",args=[month])
+       list_items+=f"<li><a href=\"{month_path}\">{capitalized_month}</a></li>"     #new link is genereated for every month on same page
+
+    response_data=f"<ul>{list_items}</ul>"
+    return HttpResponse(response_data)
+
+
+
+
 #if month is entyered as integer then this view is called
 def monthly_chalenge_by_number(request,month):
     months=list(monthly_chalenges.keys())       #.keys gives the keys  from monthly_chalenges dictionary and they are stored in a list named months
