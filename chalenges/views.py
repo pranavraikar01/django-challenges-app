@@ -65,7 +65,7 @@ from django.urls import reverse
 #     "july":"this is july",
 #     "august":"this is august"
 # }
-# #if month is entyered as integer then this view is called
+# #if month is entered as integer then this view is called
 # def monthly_chalenge_by_number(request,month):
 #     months=list(monthly_chalenges.keys())       #.keys gives the keys  from monthly_chalenges dictionary and they are stored in a list named months
 #     if month>len(months):
@@ -133,6 +133,8 @@ def monthly_chalenge_by_number(request,month):
     redirect_path=reverse("month-chalenge",args=[redirect_month]) # the reverse function convets this to /chalenge/january thus our path is more dynamic now
     return HttpResponseRedirect(redirect_path) 
     
+
+
 
 def monthly_chalenge(request,month):           #syntax of arguments to the view function imp here
    try:
