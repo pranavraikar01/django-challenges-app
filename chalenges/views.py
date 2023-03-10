@@ -1,6 +1,7 @@
 from django.http import HttpResponse,HttpResponseNotFound,HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from django.template.loader import render_to_string
 
 # Create your views here.
 # d="december"
@@ -120,7 +121,7 @@ def index(request):
 
 
 
-#if month is entyered as integer then this view is called
+#if month is entered as integer then this view is called
 def monthly_chalenge_by_number(request,month):
     months=list(monthly_chalenges.keys())       #.keys gives the keys  from monthly_chalenges dictionary and they are stored in a list named months
     if month>len(months):
@@ -137,9 +138,26 @@ def monthly_chalenge_by_number(request,month):
 
 
 def monthly_chalenge(request,month):           #syntax of arguments to the view function imp here
-   try:
+#    try:
     chalenge_text=monthly_chalenges[month]          #data from dictionary is fetched using its respective key
-    response_data=f"<h1>{chalenge_text}</h1>"
-    return HttpResponse(chalenge_text)
-   except:
-    return HttpResponseNotFound("<h1>this month doesnt exist</h1>")
+
+
+    # response_data=render_to_string("chalenges/chalenge.html")   #this is old practice now a days we directly use render function
+    # return HttpResponse("chalenges/chalenge.html")
+
+
+    # #for returning a static output i.e same html code for every month
+    # return render(request,"chalenges/chalenge.html")
+   
+
+   #for returning a dynamic output i.e diferent html  for every month
+    months_list=list(monthly_chalenges.keys())
+    chalenges_list=list(monthly_chalenges.values())
+    position = chalenges_list.index(chalenge_text)
+    return render(request,"chalenges/chalenge.html",{
+       "text":chalenge_text,
+       "list":months_list[position]
+    })
+
+#    except:
+    return HttpResponseNotFound("<h1>month not found</h1>")
