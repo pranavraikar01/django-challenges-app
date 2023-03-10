@@ -156,7 +156,7 @@ def monthly_chalenge(request,month):           #syntax of arguments to the view 
     position = chalenges_list.index(chalenge_text)
     return render(request,"chalenges/chalenge.html",{
        "text":chalenge_text,
-       "list":months_list[position]
+       "month_name":months_list[position]
     })
 
 #    except:
