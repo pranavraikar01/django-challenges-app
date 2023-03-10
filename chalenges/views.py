@@ -151,12 +151,11 @@ def monthly_chalenge(request,month):           #syntax of arguments to the view 
    
 
    #for returning a dynamic output i.e diferent html  for every month
-    months_list=list(monthly_chalenges.keys())
-    chalenges_list=list(monthly_chalenges.values())
-    position = chalenges_list.index(chalenge_text)
+   
     return render(request,"chalenges/chalenge.html",{
        "text":chalenge_text,
-       "month_name":months_list[position]
+       "month_name":month.capitalize()
+       
     })
 
 #    except:
