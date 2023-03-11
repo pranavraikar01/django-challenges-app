@@ -103,20 +103,32 @@ monthly_chalenges={
     "may":"this is may",
     "june":"this is june",
     "july":"this is july",
-    "august":"this is august"
+    "august":"this is august",
+    "september":None
 }
 
 def index(request):
-    list_items=""       #generates an empty string initially
+   #creating links for every month without using for tag
+    # list_items=""       #generates an empty string initially
+    # months=list(monthly_chalenges.keys()) 
+    # for month in months:
+    #    capitalized_month=month.capitalize()
+    #    month_path=reverse("month-chalenge",args=[month])
+    #    list_items+=f"<li><a href=\"{month_path}\">{capitalized_month}</a></li>"     #new link is genereated for every month on same page
+
+    # response_data=f"<ul>{list_items}</ul>"
+    # return HttpResponse(response_data)
+
+
+
+#creating links for every month  using for tag
     months=list(monthly_chalenges.keys()) 
+    return render(request,"chalenges/index.html", {
+        "months":months     
+    })
 
-    for month in months:
-       capitalized_month=month.capitalize()
-       month_path=reverse("month-chalenge",args=[month])
-       list_items+=f"<li><a href=\"{month_path}\">{capitalized_month}</a></li>"     #new link is genereated for every month on same page
 
-    response_data=f"<ul>{list_items}</ul>"
-    return HttpResponse(response_data)
+
 
 
 
