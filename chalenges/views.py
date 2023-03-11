@@ -154,7 +154,7 @@ def monthly_chalenge(request,month):           #syntax of arguments to the view 
    
     return render(request,"chalenges/chalenge.html",{
        "text":chalenge_text,
-       "month_name":month.capitalize()
+       "month_name":month
        
     })
 
