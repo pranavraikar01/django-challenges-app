@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Chalenges</title>
-</head>
-<body>
+{% extends "base.html" %}
+    {% block page_title%}
+    All Chalenges
+    {% endblock %}
+    {% block content %}
+    {% include "chalenges/include/header.html"%}
     <ul>
         {% comment %}  creating links of all months using for tag:-
         {% for month in months %}
@@ -23,5 +20,4 @@
         <li><a href="{% url "month-chalenge" month %}">{{month|title}}</a></li>
         {% endfor %}
     </ul> 
-</body>
-</html>
+    {% endblock %}
