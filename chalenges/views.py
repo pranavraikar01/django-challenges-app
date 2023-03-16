@@ -1,4 +1,4 @@
-from django.http import HttpResponse,HttpResponseNotFound,HttpResponseRedirect
+from django.http import HttpResponse,HttpResponseNotFound,HttpResponseRedirect,Http404
 from django.shortcuts import render
 from django.urls import reverse
 from django.template.loader import render_to_string
@@ -150,8 +150,8 @@ def monthly_chalenge_by_number(request,month):
 
 
 def monthly_chalenge(request,month):           #syntax of arguments to the view function imp here
-#    try:
-    chalenge_text=monthly_chalenges[month]          #data from dictionary is fetched using its respective key
+    try:
+        chalenge_text=monthly_chalenges[month]          #data from dictionary is fetched using its respective key
 
 
     # response_data=render_to_string("chalenges/chalenge.html")   #this is old practice now a days we directly use render function
@@ -164,11 +164,12 @@ def monthly_chalenge(request,month):           #syntax of arguments to the view 
 
    #for returning a dynamic output i.e diferent html  for every month
    
-    return render(request,"chalenges/chalenge.html",{
+        return render(request,"chalenges/chalenge.html",{
        "text":chalenge_text,
        "month_name":month
        
-    })
+        })
 
-#    except:
-    return HttpResponseNotFound("<h1>month not found</h1>")
+    except:
+    # return HttpResponseNotFound("<h1>month not found</h1>")   #this is when we written hardcoded error message
+        raise Http404()         ##this is when we written 404 error message using 404 template created by us
