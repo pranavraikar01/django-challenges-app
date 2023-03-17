@@ -1,4 +1,11 @@
     {% extends "base.html" %}
+
+     {% load static %}
+    {% block css_files%}
+    <link rel="stylesheet" href="{% static "chalenges/chalenge.css" %}">
+    <link rel="stylesheet" href="{% static "chalenges/includes/header.css" %}">
+    {% endblock %}
+
      {%block page_title %}
      {{month_name|title}}   {% comment %} here |title is a filter which capitalizes the month_name    {% endcomment %}
     {% endblock %}
@@ -12,6 +19,6 @@
           <h2>{{text}} </h2>  
           <!-- here above, text is the key i.e the month from the dictionary which is selected by clicking the link of month -->
       {%else%}
-        <p>There is  no chalenge for the month</p>
+        <p class="fallback">There is  no chalenge for the month</p>
       {%endif%}
     {% endblock%}
